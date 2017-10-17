@@ -14,20 +14,20 @@
         <link rel="stylesheet" href="stagebedrijven.css"/>
     </head>
 
-</div>
+
     <body>
         
         <h1>Stageplaats toevoegen</h1>
         
-        <form name="stageplaatsenAddForm" action="StagePlaatsenController">
+        <form name="stageplaatsenAddForm" action="Stageplaats">
             Naam:<br> <input type="text" name="naam" value="" > <br>
              Adres:<br> <input type="text" name="adres" value="" ><br>
              Postcode:<br> <input type="text" name="postcode" value="" ><br>
              Email:<br> <input type="text" name="email" value="" ><br>
-             ControleNummer:<br> <input type="text" name="primID" value="<%= primID%>" ><br>
+             <br> <input type="hidden" name="primID" value="<%= primID%>" ><br>
             
              
-             Beschrijving:<br><textarea class="descri" type ="text" name="beschrijving"></textarea><br>
+             Beschrijving:<br><textarea class="descri" name="beschrijving"></textarea><br>
              <input class="btn" type="submit" value="addUser" name="addButton" /><br>
         </form>
         <form name="stagebedrijvenShowListForm" action="list.jsp" >

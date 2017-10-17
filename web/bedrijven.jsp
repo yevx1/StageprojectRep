@@ -22,11 +22,15 @@ String primID = request.getParameter("primID");
         <h1>Your ID is <%=userId%></h1>
     <form name="Stageplaats Toevoegen" action="stageplaatsToevoegen.jsp?" >
          <li><a href="stageplaatsToevoegen.jsp?primID=<%= primID%>">Stageplaats Toevoegen</a></li>
-         <br><br>
-            <input class="btn" type="submit" value="primID=<%= primID%>" name="stageplaatsToevoegenButton" />
+         
         </form>
   <form name="HomePage" action="index.jsp" >
             <input class="btn" type="submit" value="Index" name="showListButton" />
+        </form>
+        
+        <form name="Check List" action="list.jsp?" >
+         <li><a href="list.jsp?primID=<%= primID%>">Lijst bekijken</a></li>
+         
         </form>
         
         

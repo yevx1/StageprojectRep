@@ -93,7 +93,24 @@ public class DAOStageplaatsen {
         }
     }
 
-    
+     public Stageplaatsen getUsersByUname(String userid) {
+        Stageplaatsen user = null;
+        Transaction trns = null;
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            trns = session.beginTransaction();
+            String queryString = "from Users where userId = :userId";
+            Query query = session.createQuery(queryString);
+            query.setString("userId", userid);
+            user = (Stageplaatsen) query.uniqueResult();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return user;
+    } 
 
     public Stageplaatsen getUsersById(int userid) {
         Stageplaatsen user = null;

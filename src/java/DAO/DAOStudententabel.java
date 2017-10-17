@@ -94,7 +94,24 @@ public class DAOStudententabel {
         }
     }
 
-    
+    public Studententabel getUsersByUname(String userid) {
+        Studententabel user = null;
+        Transaction trns = null;
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            trns = session.beginTransaction();
+            String queryString = "from Studententabel where userId = :userId";
+            Query query = session.createQuery(queryString);
+            query.setString("userId", userid);
+            user = (Studententabel) query.uniqueResult();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return user;
+    } 
 
     public Studententabel getUsersById(int userid) {
         Studententabel user = null;

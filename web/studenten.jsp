@@ -4,23 +4,26 @@
     Author     : yvex
 --%>
 
+<%@page import="DAO.DAOStageplaatsen"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DAL.Stageplaatsen"%>
-<%@page import="DAL.DAOStageplaatsen"%>
+
      
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% String userId=request.getParameter("userId");
-String un=request.getParameter("uname");
-%>
+
 <!DOCTYPE html>
 <html>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="stagebedrijven.css"/>
         <title>Student Page</title>
     </head>
     <body>
+        <% String userId=(String)request.getAttribute("userId");
+String un=(String)request.getAttribute("uname");
+%>
         <h1>Welcome <%=un%></h1>
         <h1>Your ID is <%=userId%></h1>
         <h3>Lijst van mogelijke stageplaatsen</h3> <br><br><br>
@@ -38,7 +41,7 @@ String un=request.getParameter("uname");
         <ul>
             
             
-             <li><a href="DetailsController?naam=<%=object.getNaam() %>"><%=object.getNaam() %></a></li>
+             <li><a href="Details?naam=<%=object.getNaam() %>"><%=object.getNaam() %></a></li>
             
         </ul>
         </form>

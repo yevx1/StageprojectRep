@@ -21,7 +21,7 @@
             <tr>
                 <td>
                     <table bgcolor="yellow">
-                        <form method="post" action="<%=request.getContextPath()%>/StudentenLoginController">
+                        <form method="post" action="<%=request.getContextPath()%>/StudentenLogin">
                            
                         <tr>
                             <td>User Name </td>

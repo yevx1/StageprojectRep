@@ -4,7 +4,7 @@
     Author     : yvex
 --%>
 
-<%@page import="DAL.DAOStageplaatsen"%>
+<%@page import="DAO.DAOStageplaatsen"%>
 <%@page import="DAL.Stageplaatsen"%>
 
 <%@page import="java.util.ArrayList"%>

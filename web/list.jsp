@@ -4,7 +4,7 @@
     Author     : yvex
 --%>
 
-<%@page import="DAL.DAOStageplaatsen"%>
+<%@page import="DAO.DAOStageplaatsen"%>
 <%@page import="DAL.Stageplaatsen"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.ForEach"%>
 
@@ -23,7 +23,7 @@
     <body>
     
     <%
-        String primID = (String)request.getAttribute("bedrijvenID"); 
+        String primID = (String)request.getAttribute("IDprim"); 
          ArrayList<Stageplaatsen> bedrijvenlist = new ArrayList<Stageplaatsen>();
              DAOStageplaatsen dao = new DAOStageplaatsen();
              bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getAllUserss();
@@ -32,12 +32,14 @@
              for (Stageplaatsen elem : bedrijvenlist) {
                  String bedrijvenID = Integer.toString(elem.getBedrijvenId());
                  if (primID ==null? bedrijvenID==null:primID.equals(bedrijvenID)) {
-                         String description = elem.getBeschrijving();%>
+                         String description = elem.getBeschrijving();
+                         String email = elem.getEmail();
+                         String naam = elem.getNaam();
+                         %>
                            <ul>
-                        <li><%=description%> <br><%=elem.getEmail() %> </li>
-                        
+                        <li><%=naam %> <%=description%> <%=email %> </li>                        
                     </ul> 
-                     }
+                     
                     
                         
      <%                    }
