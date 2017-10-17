@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>BedrijvenLoginController</servlet-name>
+        <servlet-class>Controller.BedrijvenLoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StageplaatsController</servlet-name>
+        <servlet-class>Controller.StageplaatsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailsController</servlet-name>
+        <servlet-class>Controller.DetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StudentenLoginController</servlet-name>
+        <servlet-class>Controller.StudentenLoginController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BedrijvenLoginController</servlet-name>
+        <url-pattern>/BedrijvenLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StageplaatsController</servlet-name>
+        <url-pattern>/Stageplaats</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailsController</servlet-name>
+        <url-pattern>/Details</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentenLoginController</servlet-name>
+        <url-pattern>/StudentenLogin</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
