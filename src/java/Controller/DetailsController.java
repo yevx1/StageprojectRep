@@ -7,10 +7,12 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,15 +34,27 @@ public class DetailsController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DetailsController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DetailsController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+                 String path = "details.jsp";
+        RequestDispatcher dispatch = request.getRequestDispatcher(path);
+        HttpSession Session = request.getSession();
+        String naam = request.getParameter("naam");
+        request.setAttribute("name", naam);
+        
+//        
+//        ArrayList<Stageplaatsen> bedrijvenlist = new ArrayList<Stageplaatsen>();
+//            Stageplaatsen user = new Stageplaatsen();
+//            DAOStageplaatsen dao = new DAOStageplaatsen();
+//           
+//            bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getAllUserss();
+           
+      
+        
+//        //
+//            
+//            
+           
+              //allerlaatste actie !!!
+        dispatch.forward(request, response);
         }
     }
 

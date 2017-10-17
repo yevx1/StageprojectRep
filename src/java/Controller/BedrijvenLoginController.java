@@ -5,12 +5,17 @@
  */
 package Controller;
 
+import DAL.Bedrijven;
+import DAO.DAOBedrijven;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,6 +37,33 @@ public class BedrijvenLoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+         String userId = request.getParameter("un");
+            String paswoord = request.getParameter("pw");
+          
+            
+            List<Bedrijven> users = new ArrayList<>();
+            DAOBedrijven dao = new DAOBedrijven();
+            boolean loggedIn = false;
+            users =(ArrayList<Bedrijven>) dao.getAllUserss();
+            for (Bedrijven user : users) {
+                int primID = user.getId();
+                String iDprim ;
+                 iDprim = String.valueOf(primID);
+                String uID = user.getUserId();
+                String uPaswoord = user.getPaswoord();
+                if ((uID == null ? userId == null : uID.equals(userId)) && (uPaswoord == null ? paswoord == null : uPaswoord.equals(paswoord))) {
+                    loggedIn = true;
+                    HttpSession session=request.getSession();
+            session.setAttribute("currentsession", user);
+            response.sendRedirect("bedrijven.jsp?userId="+user.getUserId()+"&uname="+user.getNaam()+"&primID="+iDprim);
+                }
+                
+            }
+            if (!loggedIn) {
+                HttpSession session=request.getSession();
+            
+            response.sendRedirect("failure.jsp");
+            }
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");

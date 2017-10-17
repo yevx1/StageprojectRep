@@ -5,12 +5,17 @@
  */
 package Controller;
 
+import DAL.Stageplaatsen;
+import DAO.DAOStageplaatsen;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,15 +37,52 @@ public class StageplaatsController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet StageplaatsController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet StageplaatsController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+               String path = "list.jsp";
+        RequestDispatcher dispatch = request.getRequestDispatcher(path);
+        HttpSession Session = request.getSession();
+        
+       
+            
+            /* TODO output your page here. You may use following sample code. */
+            
+             String naam =  request.getParameter("naam");
+             String adres = request.getParameter("adres");
+             String postcode = request.getParameter("postcode");             
+             String email =  request.getParameter("email");
+             String beschrijving =  request.getParameter("beschrijving");
+             String bedrijvenID = request.getParameter("primID");
+              request.setAttribute("IDprim", bedrijvenID);
+             int IDbedrijven = Integer.parseInt(bedrijvenID);
+            
+            
+            
+            ArrayList<Stageplaatsen> bedrijvenlist = new ArrayList<Stageplaatsen>();
+            Stageplaatsen user = new Stageplaatsen();
+            DAOStageplaatsen dao = new DAOStageplaatsen();
+            user.setNaam(naam);
+            user.setAdres(adres);
+            user.setEmail(email);
+            user.setPostcode(postcode);
+            user.setBeschrijving(beschrijving);
+            user.setBedrijvenId(IDbedrijven);
+            dao.addUsers(user);
+            bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getAllUserss();
+            System.out.println("lengte = " + bedrijvenlist.size());
+//            
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet StageBedrijvenServletController</title>");            
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h2> Servlet Van Bedrijven</h2>");
+//           
+//            out.println("</body>");
+//            out.println("</html>");
+//             HttpSession session=request.getSession();
+//            request.setAttribute("bedrijvenID", bedrijvenID);
+//            response.sendRedirect("list.jsp");
+             dispatch.forward(request, response);
         }
     }
 
