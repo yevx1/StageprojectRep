@@ -5,9 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% String userId=request.getParameter("userId");
-String un=request.getParameter("uname");
-String primID = request.getParameter("primID");
+<% String userId=(String)request.getAttribute("userId");
+String un=(String)request.getAttribute("uname");
+String primID = (String)request.getAttribute("primID");
 %>
 <!DOCTYPE html>
 <html lang="en">

@@ -70,11 +70,11 @@
           
         <br>
         <br>
-        <form name="HomePageBedrijven" action="bedrijven.jsp " >
-            <ul>
-            <li><a href="bedrijven.jsp?primID=<%= primID%> userId = <%%>" class="btn btn-default">Home</a></li>
-            </ul>
-        </form>
+        
+            
+            <a href="bedrijven.jsp?primID=<%= primID%> userId = <%%>" class="btn btn-default">Home</a>
+            
+        
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

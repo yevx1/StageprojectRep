@@ -94,7 +94,24 @@ public class DAOBedrijven {
         }
     }
 
-    
+    public Bedrijven getUsersByUname(String userid) {
+        Bedrijven user = null;
+        Transaction trns = null;
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            trns = session.beginTransaction();
+            String queryString = "from Bedrijven where userId = :userId";
+            Query query = session.createQuery(queryString);
+            query.setString("userId", userid);
+            user = (Bedrijven) query.uniqueResult();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return user;
+    } 
 
     public Bedrijven getUsersById(int userid) {
         Bedrijven user = null;

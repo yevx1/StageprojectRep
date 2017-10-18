@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,49 +34,55 @@ public class BedrijvenLoginController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    @EJB
+    Bedrijven user;
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            
+             String path = "bedrijven.jsp";
+            RequestDispatcher dispatch = request.getRequestDispatcher(path);
          String userId = request.getParameter("un");
             String paswoord = request.getParameter("pw");
           
             
-            List<Bedrijven> users = new ArrayList<>();
+//             = new Bedrijven();
             DAOBedrijven dao = new DAOBedrijven();
-            boolean loggedIn = false;
-            users =(ArrayList<Bedrijven>) dao.getAllUserss();
-            for (Bedrijven user : users) {
-                int primID = user.getId();
-                String iDprim ;
-                 iDprim = String.valueOf(primID);
+            
+            
+            
+             user = dao.getUsersByUname(userId);
+            if (user != null) {
                 String uID = user.getUserId();
                 String uPaswoord = user.getPaswoord();
-                if ((uID == null ? userId == null : uID.equals(userId)) && (uPaswoord == null ? paswoord == null : uPaswoord.equals(paswoord))) {
-                    loggedIn = true;
-                    HttpSession session=request.getSession();
-            session.setAttribute("currentsession", user);
-            response.sendRedirect("bedrijven.jsp?userId="+user.getUserId()+"&uname="+user.getNaam()+"&primID="+iDprim);
-                }
-                
-            }
-            if (!loggedIn) {
-                HttpSession session=request.getSession();
             
-            response.sendRedirect("failure.jsp");
+              if ((uID == null ? userId == null : uID.equals(userId)) && (uPaswoord == null ? paswoord == null : uPaswoord.equals(paswoord))) {
+                   
+            
+            request.setAttribute("userId", userId);
+            request.setAttribute("uname", user.getNaam()); 
+            request.setAttribute("primID",Integer.toString(user.getId()) );
+            dispatch.forward(request, response) ;
+                }
+              else 
+                   dispatch = request.getRequestDispatcher("failure.jsp");
+                dispatch.forward(request, response) ;
             }
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet BedrijvenLoginController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet BedrijvenLoginController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            
+              else 
+                   dispatch = request.getRequestDispatcher("failure.jsp");
+                dispatch.forward(request, response) ;
+            
         }
-    }
+            
+            
+        }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
