@@ -25,18 +25,7 @@
     <![endif]-->
   </head>
   <body>
-   <br><br><br>
-        
-        <br><br><br>
-        <center>
-            <h1>Welkom</h1>
-         <form name="studentForm" action="studentLogin.jsp" >
-            <input class="btn btn-success" type="submit" value="Student" name="showStudentLoginPage" />
-        </form>
-        <form name="bedrijvenForm" action="bedrijvenLogin.jsp" >
-            <input class="btn btn-warning" type="submit" value="Bedrijven" name="showBedrijvenLoginPage" />
-        </form>
-        </center>
+    <h1>Hello, world!</h1>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -44,5 +33,3 @@
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
-
-

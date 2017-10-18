@@ -10,29 +10,46 @@ String un=request.getParameter("uname");
 String primID = request.getParameter("primID");
 %>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="stagebedrijven.css"/>
-        <title>Bedrijven Page</title>
-    </head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
     
     <body>
+    <center>
         <h1>Welcome <%=un%></h1>
         <h1>Your ID is <%=userId%></h1>
+         </center>
     <form name="Stageplaats Toevoegen" action="stageplaatsToevoegen.jsp?" >
-         <li><a href="stageplaatsToevoegen.jsp?primID=<%= primID%>">Stageplaats Toevoegen</a></li>
+         <li><a href="stageplaatsToevoegen.jsp?primID=<%= primID%>" class="btn btn-default">Stageplaats Toevoegen</a></li>
          
         </form>
   <form name="HomePage" action="index.jsp" >
-            <input class="btn" type="submit" value="Index" name="showListButton" />
+            <input class="btn btn-default" type="submit" value="Index" name="showListButton" />
         </form>
         
         <form name="Check List" action="list.jsp?" >
-         <li><a href="list.jsp?IDprim=<%= primID%>">Lijst bekijken</a></li>
+         <li><a href="list.jsp?IDprim=<%= primID%>" class="btn btn-default">Lijst bekijken</a></li>
          
         </form>
         
-        
+       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
         </body>
 </html>
