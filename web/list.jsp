@@ -23,12 +23,21 @@
     <body>
     
     <%
-        String primID = (String)request.getAttribute("IDprim"); 
+        String primID = "0" ;
+        if (request.getAttribute("IDprim")!= null) {
+                 primID = (String)request.getAttribute("IDprim");
+            }
+        else if (request.getParameter("IDprim")!= null) {
+                 primID = request.getParameter("IDprim");
+            }
+        
          ArrayList<Stageplaatsen> bedrijvenlist = new ArrayList<Stageplaatsen>();
              DAOStageplaatsen dao = new DAOStageplaatsen();
-             bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getAllUserss();
-             
              Integer idPrim = Integer.parseInt(primID);
+             bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getFKIDUserss(idPrim);
+             
+             
+             
              for (Stageplaatsen elem : bedrijvenlist) {
                  String bedrijvenID = Integer.toString(elem.getBedrijvenId());
                  if (primID ==null? bedrijvenID==null:primID.equals(bedrijvenID)) {
@@ -49,8 +58,10 @@
           
         <br>
         <br>
-        <form name="HomePage" action="index.jsp" >
-            <input class="btn" type="submit" value="Index" name="showListButton" />
+        <form name="HomePageBedrijven" action="bedrijven.jsp " >
+            <ul>
+            <li><a href="bedrijven.jsp?primID=<%= primID%> userId = <%%>">Home</a></li>
+            </ul>
         </form>
         
     </body>

@@ -29,7 +29,7 @@ String primID = request.getParameter("primID");
         </form>
         
         <form name="Check List" action="list.jsp?" >
-         <li><a href="list.jsp?primID=<%= primID%>">Lijst bekijken</a></li>
+         <li><a href="list.jsp?IDprim=<%= primID%>">Lijst bekijken</a></li>
          
         </form>
         

@@ -40,7 +40,7 @@ public class StudentenLoginController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
              String path = "studenten.jsp";
             RequestDispatcher dispatch = request.getRequestDispatcher(path);
-            HttpSession session=request.getSession();
+//            HttpSession session=request.getSession();
         
            String userId = request.getParameter("un");
             String paswoord = request.getParameter("pw");
@@ -49,36 +49,28 @@ public class StudentenLoginController extends HttpServlet {
             DAOStudententabel dao = new DAOStudententabel();
             
             user = dao.getUsersByUname(userId);
-            String uID = user.getUserId();
+            if (user != null) {
+                String uID = user.getUserId();
                 String uPaswoord = user.getPaswoord();
             
               if ((uID == null ? userId == null : uID.equals(userId)) && (uPaswoord == null ? paswoord == null : uPaswoord.equals(paswoord))) {
                    
             
-            session.setAttribute("userId", userId);
-            session.setAttribute("uname", user.getVoornaam());
-//            response.sendRedirect("studenten.jsp?userId="+user.getUserId()+"&uname="+user.getVoornaam());
-            dispatch.forward(request, response);
+            request.setAttribute("userId", userId);
+            request.setAttribute("uname", user.getVoornaam());         
+            dispatch.forward(request, response) ;
                 }
-              else response.sendRedirect("failure.jsp");
-//              
-//            users =(ArrayList<Studententabel>) dao.getAllUserss();
-//            for (Studententabel user : users) {
-//                
-//                String uID = user.getUserId();
-//                String uPaswoord = user.getPaswoord();
-//                if ((uID == null ? userId == null : uID.equals(userId)) && (uPaswoord == null ? paswoord == null : uPaswoord.equals(paswoord))) {
-//                   
-//            HttpSession session=request.getSession();
-//            session.setAttribute("userId", userId);
-//            session.setAttribute("uname", user.getVoornaam());
-////            response.sendRedirect("studenten.jsp?userId="+user.getUserId()+"&uname="+user.getVoornaam());
-//            dispatch.forward(request, response);
-//                }
-                
+              else 
+                   dispatch = request.getRequestDispatcher("failure.jsp");
+                dispatch.forward(request, response) ;
             }
             
-           
+              else 
+                   dispatch = request.getRequestDispatcher("failure.jsp");
+                dispatch.forward(request, response) ;
+            }
+            
+          
             
         }
     

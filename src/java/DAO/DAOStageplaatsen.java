@@ -36,6 +36,57 @@ public class DAOStageplaatsen {
             session.close();
         }
     }
+   public Stageplaatsen getUsersByUname(String userid) {
+        Stageplaatsen user = null;
+        Transaction trns = null;
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            trns = session.beginTransaction();
+            String queryString = "from Users where userId = :userId";
+            Query query = session.createQuery(queryString);
+            query.setString("userId", userid);
+            user = (Stageplaatsen) query.uniqueResult();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return user;
+    } 
+   public List<Stageplaatsen> getFKIDUserss(int primID) {
+//        System.out.println("start method all users in dao"); 
+        List<Stageplaatsen> users = new ArrayList<Stageplaatsen>();
+        
+        Transaction trns = null;
+        
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            trns = session.beginTransaction();
+            
+            String hql =  "from Stageplaatsen where BedrijvenID = :primID";
+             Query query = session.createQuery(hql);
+             query .setInteger("primID", primID) ;
+              users= query.list();      
+                    
+//                    "from Stageplaatsen where id =: BedrijvenID";
+//            Query query = session.createQuery(hql);
+//            query.setInteger("id", primID);
+//            users= query.list();
+            
+            
+//            query.setInteger("primID", primID);
+//            System.out.println("users querried en lengte = " + users.size());
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        System.out.println("size in dao = " + users.size());
+        return users;
+    }
+   
    public List<Stageplaatsen> getAllUserss() {
 //        System.out.println("start method all users in dao"); 
         List<Stageplaatsen> users = new ArrayList<Stageplaatsen>();
@@ -93,24 +144,7 @@ public class DAOStageplaatsen {
         }
     }
 
-     public Stageplaatsen getUsersByUname(String userid) {
-        Stageplaatsen user = null;
-        Transaction trns = null;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
-        try {
-            trns = session.beginTransaction();
-            String queryString = "from Users where userId = :userId";
-            Query query = session.createQuery(queryString);
-            query.setString("userId", userid);
-            user = (Stageplaatsen) query.uniqueResult();
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }
-        return user;
-    } 
+     
 
     public Stageplaatsen getUsersById(int userid) {
         Stageplaatsen user = null;
