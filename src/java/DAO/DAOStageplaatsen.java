@@ -54,6 +54,32 @@ public class DAOStageplaatsen {
         }
         return user;
     } 
+   
+   public List<Stageplaatsen> getDetailsByname(String name) {
+//        System.out.println("start method all users in dao"); 
+        List<Stageplaatsen> users = new ArrayList<Stageplaatsen>();
+        
+        Transaction trns = null;
+        
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            trns = session.beginTransaction();
+            
+            String hql =  "from Stageplaatsen where Naam = :name";
+             Query query = session.createQuery(hql);
+             query .setString("name", name) ;
+              users= query.list();      
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        System.out.println("size in dao = " + users.size());
+        return users;
+    }
+   
    public List<Stageplaatsen> getFKIDUserss(int primID) {
 //        System.out.println("start method all users in dao"); 
         List<Stageplaatsen> users = new ArrayList<Stageplaatsen>();

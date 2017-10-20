@@ -6,8 +6,8 @@
 package Controller;
 
 import DAL.Bedrijven;
-import DAO.DAOBedrijven;
-import beansStateFul.UserBean;
+import DAL.Stageplaatsen;
+import DAO.DAOStageplaatsen;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,8 +24,11 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author yvex
- */
-public class BedrijvenLoginController extends HttpServlet {
+
+*/
+
+@WebServlet(name = "CompanyListController", urlPatterns = {"/CompanyList"})
+public class CompanyListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,63 +39,36 @@ public class BedrijvenLoginController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    @EJB
-    UserBean user;
-    
+//    @EJB
+//    Bedrijven user;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-             String path = "bedrijven.jsp";
+            String path = "list.jsp";
             RequestDispatcher dispatch = request.getRequestDispatcher(path);
-         String userId = request.getParameter("un");
-            String paswoord = request.getParameter("pw");
-          
+            String un = request.getParameter("un");
+            String userId = request.getParameter("userId");
+            String primID = request.getParameter("primID");
             
+            
+            
+             List<Stageplaatsen> bedrijvenlist = new ArrayList<Stageplaatsen>();
+             DAOStageplaatsen dao = new DAOStageplaatsen();
+             Integer idPrim = Integer.parseInt(primID);
+             bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getFKIDUserss(idPrim);
+             
 
-            DAOBedrijven dao = new DAOBedrijven();
-            
-            
-            Bedrijven person = dao.getUsersByUname(userId);
-            if (person != null) {
-                
+             request.setAttribute("bedrijvenlist", bedrijvenlist);
+        
+        
            
-                user.userRegister(person); 
-                if (user != null) {
-                String uID = user.getUser().getUserId() ;
-                String uPaswoord = user.getUser().getPaswoord();
-            
-                    if ((uID == null ? userId == null : uID.equals(userId)) && (uPaswoord == null ? paswoord == null : uPaswoord.equals(paswoord))) {
-                   
-            
-                        request.setAttribute("userId", userId);
-                        request.setAttribute("uname", user.getUser().getNaam()); 
-                        request.setAttribute("primID",Integer.toString(user.getUser().getId()) );
-                        dispatch.forward(request, response) ;
-                    }
-                    else 
-                        dispatch = request.getRequestDispatcher("failure.jsp?retry=company");
-                        dispatch.forward(request, response) ;
-                 }
-            
-                else 
-                   dispatch = request.getRequestDispatcher("failure.jsp?retry=company");
-                   dispatch.forward(request, response) ;
-            
-            }
-            
-            else
-               dispatch = request.getRequestDispatcher("failure.jsp?retry=company");
-                   dispatch.forward(request, response) ; 
-             }
-            
-            
+              //allerlaatste actie !!!
+             dispatch.forward(request, response);            
         }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

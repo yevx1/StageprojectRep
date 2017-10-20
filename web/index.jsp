@@ -33,6 +33,7 @@
          <form name="studentForm" action="studentLogin.jsp" >
             <input class="btn btn-success" type="submit" value="Student" name="showStudentLoginPage" />
         </form>
+            <br>
         <form name="bedrijvenForm" action="bedrijvenLogin.jsp" >
             <input class="btn btn-warning" type="submit" value="Bedrijven" name="showBedrijvenLoginPage" />
         </form>

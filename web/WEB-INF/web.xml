@@ -16,6 +16,10 @@
         <servlet-name>StudentenLoginController</servlet-name>
         <servlet-class>Controller.StudentenLoginController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BedrijvenToHomeController</servlet-name>
+        <servlet-class>Controller.BedrijvenToHomeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BedrijvenLoginController</servlet-name>
         <url-pattern>/BedrijvenLogin</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>StudentenLoginController</servlet-name>
         <url-pattern>/StudentenLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BedrijvenToHomeController</servlet-name>
+        <url-pattern>/BedrijvenHome</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

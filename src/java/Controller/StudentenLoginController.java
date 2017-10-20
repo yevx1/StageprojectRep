@@ -61,12 +61,12 @@ public class StudentenLoginController extends HttpServlet {
             dispatch.forward(request, response) ;
                 }
               else 
-                   dispatch = request.getRequestDispatcher("failure.jsp");
+                   dispatch = request.getRequestDispatcher("failure.jsp?retry=student");
                 dispatch.forward(request, response) ;
             }
             
               else 
-                   dispatch = request.getRequestDispatcher("failure.jsp");
+                   dispatch = request.getRequestDispatcher("failure.jsp?retry=student");
                 dispatch.forward(request, response) ;
             }
             

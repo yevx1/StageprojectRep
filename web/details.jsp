@@ -22,15 +22,16 @@
         <%
         
          ArrayList<Stageplaatsen> bedrijvenlist = new ArrayList<Stageplaatsen>();
-             DAOStageplaatsen dao = new DAOStageplaatsen();
-             bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getAllUserss();
-             String naam = (String)request.getAttribute("name"); %>
+             
+             bedrijvenlist = (ArrayList<Stageplaatsen>)request.getAttribute("bedrijvenlist");
+        String naam = (String)request.getAttribute("name");
+        %>
              <h3> <%=naam%> </h3>
              
              
              <%
              for (Stageplaatsen stagebedrijven : bedrijvenlist) {
-                 if (stagebedrijven.getNaam() == null ? naam == null : stagebedrijven.getNaam().equals(naam)) {
+                 
                     String description = stagebedrijven.getBeschrijving(); %>
                     
                     <ul>
@@ -41,7 +42,7 @@
                     
                     
             <% }  %>
-            <% }  %>
+       
                     
                  
                     

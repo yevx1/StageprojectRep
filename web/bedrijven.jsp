@@ -34,19 +34,16 @@ String primID = (String)request.getAttribute("primID");
         <h1>Welcome <%=un%></h1>
         <h1>Your ID is <%=userId%></h1>
          </center>
-    <form name="Stageplaats Toevoegen" action="stageplaatsToevoegen.jsp?" >
-         <li><a href="stageplaatsToevoegen.jsp?primID=<%= primID%>" class="btn btn-default">Stageplaats Toevoegen</a></li>
-         
-        </form>
-  <form name="HomePage" action="index.jsp" >
-            <input class="btn btn-default" type="submit" value="Index" name="showListButton" />
-        </form>
+         <center>
+             <br><br><br>
         
-        <form name="Check List" action="list.jsp?" >
-         <li><a href="list.jsp?IDprim=<%= primID%>" class="btn btn-default">Lijst bekijken</a></li>
-         
-        </form>
+         <a href="stageplaatsToevoegen.jsp?primID=<%= primID%>" class="btn btn-default">Stageplaats Toevoegen</a>  
         
+        
+        
+             <a href="CompanyList?un=<%= un%> &userId=<%= userId%> &primID=<%= primID%>" class="btn btn-default">Stageplaatsen Bekijken</a>  
+                                     
+        </center>
        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

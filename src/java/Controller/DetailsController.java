@@ -5,8 +5,11 @@
  */
 package Controller;
 
+import DAL.Stageplaatsen;
+import DAO.DAOStageplaatsen;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,21 +41,13 @@ public class DetailsController extends HttpServlet {
         RequestDispatcher dispatch = request.getRequestDispatcher(path);
         HttpSession Session = request.getSession();
         String naam = request.getParameter("naam");
-        request.setAttribute("name", naam);
         
-//        
-//        ArrayList<Stageplaatsen> bedrijvenlist = new ArrayList<Stageplaatsen>();
-//            Stageplaatsen user = new Stageplaatsen();
-//            DAOStageplaatsen dao = new DAOStageplaatsen();
-//           
-//            bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getAllUserss();
-           
-      
         
-//        //
-//            
-//            
-           
+        ArrayList<Stageplaatsen> bedrijvenlist = new ArrayList<Stageplaatsen>();
+             DAOStageplaatsen dao = new DAOStageplaatsen();
+             bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getDetailsByname(naam);
+           request.setAttribute("bedrijvenlist", bedrijvenlist);
+           request.setAttribute("name", naam);
               //allerlaatste actie !!!
         dispatch.forward(request, response);
         }
