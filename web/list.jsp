@@ -15,6 +15,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+    
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,23 +32,45 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
   </head>
   
     <body>
-    
+    <table data-toggle="table">
+    <thead>
+        <tr>
+            <th>Naam</th>
+            <th>Email</th>
+            <th>Beschrijving</th>
+        </tr>
+    </thead>
+   
     <%   
+          String userId = (String)request.getAttribute("userId");
             List<Stageplaatsen> list = new ArrayList<Stageplaatsen>();
             try{
            list = (List<Stageplaatsen>)request.getAttribute("bedrijvenlist");
+           
            for (Stageplaatsen elem : list) {
                          %>
-                           <ul>
-                        <li><%=elem.getNaam()%> <%=elem.getBeschrijving()%> <%=elem.getEmail() %> </li>                        
-                    </ul> 
+                          
+                          <tbody>
+        <tr>
+            <td><%=elem.getNaam()%></td>
+            <td><%=elem.getEmail() %></td>
+            <td><%=elem.getBeschrijving()%> </td>
+        </tr>
+        
+   
+                         
+                         
+                         
                      
                     
                         
      <%                    }
+%> </tbody>
+</table><%
 }
         catch(Exception e)
             {%>
@@ -62,7 +85,7 @@
         <br>
         
             
-            <a href="BedrijvenHome" class="btn btn-default">Home</a>
+            <a href="BedrijvenHome?userId=<%=userId%>" class="btn btn-default">Home</a>
             
         
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

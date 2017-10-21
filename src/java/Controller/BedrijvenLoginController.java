@@ -7,18 +7,18 @@ package Controller;
 
 import DAL.Bedrijven;
 import DAO.DAOBedrijven;
-import beansStateFul.UserBean;
+import beansStateFul.BedrijvenBLocal;
+import beansStateFul.BedrijvenBLocalLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,7 +37,9 @@ public class BedrijvenLoginController extends HttpServlet {
      */
     
     @EJB
-    UserBean user;
+    BedrijvenBLocalLocal bedrijfB;
+//    UserBean user;
+    
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -51,26 +53,31 @@ public class BedrijvenLoginController extends HttpServlet {
          String userId = request.getParameter("un");
             String paswoord = request.getParameter("pw");
           
-            
+            try {  
+                InitialContext ic = new InitialContext();
+                bedrijfB = (BedrijvenBLocal) ic.lookup("java:local/Stagebedrijven7/BedrijvenBLocal");
+            } catch (NamingException ex) {
+                System.out.println("nope");
+            }
 
             DAOBedrijven dao = new DAOBedrijven();
             
             
-            Bedrijven person = dao.getUsersByUname(userId);
-            if (person != null) {
+            Bedrijven bedrijf = dao.getUsersByUname(userId);
+            if (bedrijf != null) {
                 
-           
-                user.userRegister(person); 
-                if (user != null) {
-                String uID = user.getUser().getUserId() ;
-                String uPaswoord = user.getUser().getPaswoord();
+                bedrijfB.userRegister(bedrijf);
+//                user.userRegister(bedrijf); 
+                if (bedrijfB != null) {
+                String uID = bedrijfB.getBedrijf().getUserId() ;
+                String uPaswoord = bedrijfB.getBedrijf().getPaswoord();
             
                     if ((uID == null ? userId == null : uID.equals(userId)) && (uPaswoord == null ? paswoord == null : uPaswoord.equals(paswoord))) {
                    
             
                         request.setAttribute("userId", userId);
-                        request.setAttribute("uname", user.getUser().getNaam()); 
-                        request.setAttribute("primID",Integer.toString(user.getUser().getId()) );
+                        request.setAttribute("uname", bedrijfB.getBedrijf().getNaam()); 
+                        request.setAttribute("primID",Integer.toString(bedrijfB.getBedrijf().getId()) );
                         dispatch.forward(request, response) ;
                     }
                     else 

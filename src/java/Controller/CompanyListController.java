@@ -8,18 +8,21 @@ package Controller;
 import DAL.Bedrijven;
 import DAL.Stageplaatsen;
 import DAO.DAOStageplaatsen;
+import beansStateFul.BedrijvenBLocal;
+import beansStateFul.BedrijvenBLocalLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -40,7 +43,8 @@ public class CompanyListController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
 //    @EJB
-//    Bedrijven user;
+//    BedrijvenBLocalLocal bedrijfB;
+//    UserBean user;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,9 +53,21 @@ public class CompanyListController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String path = "list.jsp";
             RequestDispatcher dispatch = request.getRequestDispatcher(path);
+//            try {  
+//                InitialContext ic = new InitialContext();
+//                bedrijfB = (BedrijvenBLocal) ic.lookup("java:local/Stagebedrijven7/BedrijvenBLocal");
+//            } catch (NamingException ex) {
+//                System.out.println("nope");
+//            }
+            
+//            Bedrijven example = bedrijfB.getBedrijf();
+//            String naamExample = example.getNaam();
+            
             String un = request.getParameter("un");
             String userId = request.getParameter("userId");
             String primID = request.getParameter("primID");
+            
+            
             
             
             
@@ -62,6 +78,7 @@ public class CompanyListController extends HttpServlet {
              
 
              request.setAttribute("bedrijvenlist", bedrijvenlist);
+             request.setAttribute("userId", userId);
         
         
            

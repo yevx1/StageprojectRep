@@ -6,6 +6,9 @@
 package Controller;
 
 import DAL.Bedrijven;
+import DAO.DAOBedrijven;
+import beansStateFul.BedrijvenBLocal;
+import beansStateFul.BedrijvenBean;
 import beansStateFul.UserBean;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,8 +40,9 @@ public class BedrijvenToHomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    @EJB
-    UserBean user;
+//    @EJB
+//    BedrijvenBLocal bedrijfB;
+//    UserBean user;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
@@ -46,16 +50,37 @@ public class BedrijvenToHomeController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String path = "bedrijven.jsp";
             RequestDispatcher dispatch = request.getRequestDispatcher(path);
-            UserBean person = (UserBean)new InitialContext().lookup("java:module/UserBean");
-            String userId= person.getUser().getUserId();
-            String uname=person.getUser().getNaam();
-            int IDprim = person.getUser().getId();
-            String primID = Integer.toString(IDprim);
+            String userId = (String)request.getParameter("userId");
+            DAOBedrijven dao = new DAOBedrijven();
+            Bedrijven bedrijf = dao.getUsersByUname(userId);
             
-            request.setAttribute("uname", uname);
-            request.setAttribute("userId", userId);
-            request.setAttribute("primID", primID);
-            dispatch.forward(request, response);
+            if (bedrijf != null) {
+                
+                
+                String uID = bedrijf.getUserId() ;
+                
+            
+                    if ((uID == null ? userId == null : uID.equals(userId))) {
+                   
+            
+                        request.setAttribute("userId", userId);
+                        request.setAttribute("uname", bedrijf.getNaam()); 
+                        request.setAttribute("primID",Integer.toString(bedrijf.getId()) );
+                        dispatch.forward(request, response) ;
+                    }
+            }
+//            String userId = bedrijfB.getBedrijf().getUserId();
+            
+//            UserBean person = (UserBean)new InitialContext().lookup("java:module/UserBean");
+//            String userId= person.getUser().getUserId();
+//            String uname=person.getUser().getNaam();
+//            int IDprim = person.getUser().getId();
+//            String primID = Integer.toString(IDprim);
+            
+//            request.setAttribute("uname", uname);
+//            request.setAttribute("userId", userId);
+//            request.setAttribute("primID", primID);
+//            dispatch.forward(request, response);
         }
     }
 

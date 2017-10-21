@@ -4,6 +4,9 @@
     Author     : yvex
 --%>
 
+<%@page import="java.util.LinkedHashSet"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.HashSet"%>
 <%@page import="DAO.DAOStageplaatsen"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DAL.Stageplaatsen"%>
@@ -30,18 +33,25 @@ String un=(String)request.getAttribute("uname");
         <%
         
          ArrayList<Stageplaatsen> bedrijvenlist = new ArrayList<Stageplaatsen>();
+         Set<Stageplaatsen>noDuplicates = new LinkedHashSet<Stageplaatsen>();
              DAOStageplaatsen dao = new DAOStageplaatsen();
              bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getAllUserss();
              for (Stageplaatsen object : bedrijvenlist) {
+                 noDuplicates.add(object);}
+             for (Stageplaatsen elem : noDuplicates) {
+                     
+                 
                     
                  
                     
         %>
+        
+        
         <form name="studentenToDetailsForm" action="DetailsController">
         <ul>
             
             
-             <li><a href="Details?naam=<%=object.getNaam() %>"><%=object.getNaam() %></a></li>
+             <li><a href="Details?naam=<%=elem.getNaam() %>"><%=elem.getNaam() %></a></li>
             
         </ul>
         </form>
