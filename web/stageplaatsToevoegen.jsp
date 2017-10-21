@@ -5,7 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%String primID = request.getParameter("primID");%>
+<%String primID = request.getParameter("primID");
+String userId = request.getParameter("userId");
+String un = request.getParameter("un");
+%>
 <!DOCTYPE html>
 <html>
      <head>
@@ -25,13 +28,12 @@
              Postcode:<br> <input type="text" name="postcode" value="" ><br>
              Email:<br> <input type="text" name="email" value="" ><br>
              <br> <input type="hidden" name="primID" value="<%= primID%>" ><br>
+             <input type="hidden" name="userId" value="<%= userId%>" >
             
              
              Beschrijving:<br><textarea class="descri" name="beschrijving"></textarea><br>
              <input class="btn" type="submit" value="addUser" name="addButton" /><br>
         </form>
-        <form name="stagebedrijvenShowListForm" action="list.jsp" >
-            <input class="btn" type="submit" value="showList" name="showListButton" />
-        </form>
+         <a href="CompanyList?un=<%= un%>&userId=<%= userId%>&primID=<%= primID%>" class="btn btn-default">Stageplaatsen Bekijken</a>
     </body>
 </html>

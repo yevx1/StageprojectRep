@@ -40,9 +40,7 @@ public class BedrijvenToHomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-//    @EJB
-//    BedrijvenBLocal bedrijfB;
-//    UserBean user;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
@@ -68,19 +66,7 @@ public class BedrijvenToHomeController extends HttpServlet {
                         request.setAttribute("primID",Integer.toString(bedrijf.getId()) );
                         dispatch.forward(request, response) ;
                     }
-            }
-//            String userId = bedrijfB.getBedrijf().getUserId();
-            
-//            UserBean person = (UserBean)new InitialContext().lookup("java:module/UserBean");
-//            String userId= person.getUser().getUserId();
-//            String uname=person.getUser().getNaam();
-//            int IDprim = person.getUser().getId();
-//            String primID = Integer.toString(IDprim);
-            
-//            request.setAttribute("uname", uname);
-//            request.setAttribute("userId", userId);
-//            request.setAttribute("primID", primID);
-//            dispatch.forward(request, response);
+            }         
         }
     }
 

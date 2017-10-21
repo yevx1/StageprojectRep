@@ -40,7 +40,9 @@
     <thead>
         <tr>
             <th>Naam</th>
+            
             <th>Email</th>
+            
             <th>Beschrijving</th>
         </tr>
     </thead>
@@ -54,10 +56,12 @@
            for (Stageplaatsen elem : list) {
                          %>
                           
-                          <tbody>
+        <tbody>
         <tr>
             <td><%=elem.getNaam()%></td>
+            
             <td><%=elem.getEmail() %></td>
+            
             <td><%=elem.getBeschrijving()%> </td>
         </tr>
         
@@ -68,9 +72,10 @@
                      
                     
                         
-     <%                    }
-%> </tbody>
-</table><%
+     <%}%> 
+        </tbody>
+</table>
+<%
 }
         catch(Exception e)
             {%>

@@ -26,24 +26,14 @@
     <body>
         <% String userId=(String)request.getAttribute("userId");
 String un=(String)request.getAttribute("uname");
+Set<String>noDuplicates = (Set<String>)request.getAttribute("bedrijvenlist");
 %>
         <h1>Welcome <%=un%></h1>
         <h1>Your ID is <%=userId%></h1>
         <h3>Lijst van mogelijke stageplaatsen</h3> <br><br><br>
         <%
-        
-         ArrayList<Stageplaatsen> bedrijvenlist = new ArrayList<Stageplaatsen>();
-         Set<Stageplaatsen>noDuplicates = new LinkedHashSet<Stageplaatsen>();
-             DAOStageplaatsen dao = new DAOStageplaatsen();
-             bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getAllUserss();
-             for (Stageplaatsen object : bedrijvenlist) {
-                 noDuplicates.add(object);}
-             for (Stageplaatsen elem : noDuplicates) {
-                     
-                 
-                    
-                 
-                    
+             for (String elem : noDuplicates) { 
+                
         %>
         
         
@@ -51,7 +41,7 @@ String un=(String)request.getAttribute("uname");
         <ul>
             
             
-             <li><a href="Details?naam=<%=elem.getNaam() %>"><%=elem.getNaam() %></a></li>
+             <li><a href="Details?naam=<%=elem%> &userId=<%=userId%>"><%=elem%></a></li>
             
         </ul>
         </form>

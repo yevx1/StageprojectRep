@@ -7,13 +7,8 @@ package Controller;
 
 import DAL.Bedrijven;
 import DAO.DAOBedrijven;
-import beansStateFul.BedrijvenBLocal;
-import beansStateFul.BedrijvenBLocalLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.ejb.EJB;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,9 +31,7 @@ public class BedrijvenLoginController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    @EJB
-    BedrijvenBLocalLocal bedrijfB;
-//    UserBean user;
+  
     
     
     
@@ -48,17 +41,12 @@ public class BedrijvenLoginController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-             String path = "bedrijven.jsp";
+            String path = "bedrijven.jsp";
             RequestDispatcher dispatch = request.getRequestDispatcher(path);
-         String userId = request.getParameter("un");
+            String userId = request.getParameter("un");
             String paswoord = request.getParameter("pw");
           
-            try {  
-                InitialContext ic = new InitialContext();
-                bedrijfB = (BedrijvenBLocal) ic.lookup("java:local/Stagebedrijven7/BedrijvenBLocal");
-            } catch (NamingException ex) {
-                System.out.println("nope");
-            }
+            
 
             DAOBedrijven dao = new DAOBedrijven();
             
@@ -66,18 +54,17 @@ public class BedrijvenLoginController extends HttpServlet {
             Bedrijven bedrijf = dao.getUsersByUname(userId);
             if (bedrijf != null) {
                 
-                bedrijfB.userRegister(bedrijf);
-//                user.userRegister(bedrijf); 
-                if (bedrijfB != null) {
-                String uID = bedrijfB.getBedrijf().getUserId() ;
-                String uPaswoord = bedrijfB.getBedrijf().getPaswoord();
+                
+                
+                String uID = bedrijf.getUserId() ;
+                String uPaswoord = bedrijf.getPaswoord();
             
                     if ((uID == null ? userId == null : uID.equals(userId)) && (uPaswoord == null ? paswoord == null : uPaswoord.equals(paswoord))) {
                    
             
                         request.setAttribute("userId", userId);
-                        request.setAttribute("uname", bedrijfB.getBedrijf().getNaam()); 
-                        request.setAttribute("primID",Integer.toString(bedrijfB.getBedrijf().getId()) );
+                        request.setAttribute("uname", bedrijf.getNaam()); 
+                        request.setAttribute("primID",Integer.toString(bedrijf.getId()) );
                         dispatch.forward(request, response) ;
                     }
                     else 
@@ -90,13 +77,6 @@ public class BedrijvenLoginController extends HttpServlet {
                    dispatch.forward(request, response) ;
             
             }
-            
-            else
-               dispatch = request.getRequestDispatcher("failure.jsp?retry=company");
-                   dispatch.forward(request, response) ; 
-             }
-            
-            
         }
     
 

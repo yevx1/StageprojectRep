@@ -37,11 +37,11 @@ String primID = (String)request.getAttribute("primID");
          <center>
              <br><br><br>
         
-         <a href="stageplaatsToevoegen.jsp?primID=<%= primID%>" class="btn btn-default">Stageplaats Toevoegen</a>  
+         <a href="stageplaatsToevoegen.jsp?un=<%= un%>&primID=<%= primID%>&userId=<%= userId%>" class="btn btn-default">Stageplaats Toevoegen</a>  
         
         
         
-             <a href="CompanyList?un=<%= un%> &userId=<%= userId%> &primID=<%= primID%>" class="btn btn-default">Stageplaatsen Bekijken</a>  
+             <a href="CompanyList?un=<%= un%>&userId=<%= userId%>&primID=<%= primID%>" class="btn btn-default">Stageplaatsen Bekijken</a>  
                                      
         </center>
        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -41,13 +41,14 @@ public class DetailsController extends HttpServlet {
         RequestDispatcher dispatch = request.getRequestDispatcher(path);
         HttpSession Session = request.getSession();
         String naam = request.getParameter("naam");
-        
+        String userId = request.getParameter("userId");
         
         ArrayList<Stageplaatsen> bedrijvenlist = new ArrayList<Stageplaatsen>();
              DAOStageplaatsen dao = new DAOStageplaatsen();
              bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getDetailsByname(naam);
            request.setAttribute("bedrijvenlist", bedrijvenlist);
            request.setAttribute("name", naam);
+           request.setAttribute("userId", userId);
               //allerlaatste actie !!!
         dispatch.forward(request, response);
         }

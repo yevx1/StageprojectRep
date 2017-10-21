@@ -39,7 +39,7 @@ public class StageplaatsController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
                String path = "list.jsp";
         RequestDispatcher dispatch = request.getRequestDispatcher(path);
-        HttpSession Session = request.getSession();
+//        HttpSession Session = request.getSession();
         
        
             
@@ -51,8 +51,9 @@ public class StageplaatsController extends HttpServlet {
              String email =  request.getParameter("email");
              String beschrijving =  request.getParameter("beschrijving");
              String bedrijvenID = request.getParameter("primID");
-              request.setAttribute("IDprim", bedrijvenID);
-             int IDbedrijven = Integer.parseInt(bedrijvenID);
+             String userId = request.getParameter("userId");
+             Integer idBedrijven = Integer.parseInt(bedrijvenID);
+//             Integer IDbedrijven = Integer.parseInt(bedrijvenID);
             
             
             
@@ -64,9 +65,11 @@ public class StageplaatsController extends HttpServlet {
             user.setEmail(email);
             user.setPostcode(postcode);
             user.setBeschrijving(beschrijving);
-            user.setBedrijvenId(IDbedrijven);
+            user.setBedrijvenId(idBedrijven);
             dao.addUsers(user);
-            bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getAllUserss();
+            bedrijvenlist = bedrijvenlist = (ArrayList<Stageplaatsen>) dao.getFKIDUserss(idBedrijven);
+            request.setAttribute("bedrijvenlist", bedrijvenlist);
+            request.setAttribute("userId", userId);
             System.out.println("lengte = " + bedrijvenlist.size());
 //            
 //            out.println("<!DOCTYPE html>");

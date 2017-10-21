@@ -5,18 +5,20 @@
  */
 package Controller;
 
+import DAL.Stageplaatsen;
 import DAL.Studententabel;
+import DAO.DAOStageplaatsen;
 import DAO.DAOStudententabel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -40,12 +42,27 @@ public class StudentenLoginController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
              String path = "studenten.jsp";
             RequestDispatcher dispatch = request.getRequestDispatcher(path);
-//            HttpSession session=request.getSession();
-        
+
            String userId = request.getParameter("un");
             String paswoord = request.getParameter("pw");
           Studententabel user = new Studententabel();
-
+          
+          
+            ArrayList<Stageplaatsen> bedrijvenlist = new ArrayList<Stageplaatsen>();
+            Set<String>noDuplicates = new LinkedHashSet<String>();
+            DAOStageplaatsen daostageplaatsen = new DAOStageplaatsen();
+            bedrijvenlist = (ArrayList<Stageplaatsen>) daostageplaatsen.getAllUserss();
+            ArrayList<String> bedrijfsnamen = new ArrayList<>();
+            
+            for (Stageplaatsen elem : bedrijvenlist) {
+               
+                bedrijfsnamen.add(elem.getNaam());
+            
+            }
+            
+            for (String elem : bedrijfsnamen) {
+                noDuplicates.add(elem);
+            }
             DAOStudententabel dao = new DAOStudententabel();
             
             user = dao.getUsersByUname(userId);
@@ -57,7 +74,8 @@ public class StudentenLoginController extends HttpServlet {
                    
             
             request.setAttribute("userId", userId);
-            request.setAttribute("uname", user.getVoornaam());         
+            request.setAttribute("uname", user.getVoornaam());  
+            request.setAttribute("bedrijvenlist", noDuplicates);
             dispatch.forward(request, response) ;
                 }
               else 
