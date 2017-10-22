@@ -7,15 +7,10 @@ package Controller;
 
 import DAL.Bedrijven;
 import DAO.DAOBedrijven;
-import beansStateFul.BedrijvenBLocal;
-import beansStateFul.BedrijvenBean;
-import beansStateFul.UserBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import javax.servlet.RequestDispatcher;

@@ -5,18 +5,12 @@
  */
 package Controller;
 
-import DAL.Bedrijven;
 import DAL.Stageplaatsen;
 import DAO.DAOStageplaatsen;
-import beansStateFul.BedrijvenBLocal;
-import beansStateFul.BedrijvenBLocalLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

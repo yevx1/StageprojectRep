@@ -15,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,7 +38,7 @@ public class StageplaatsController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
                String path = "list.jsp";
         RequestDispatcher dispatch = request.getRequestDispatcher(path);
-//        HttpSession Session = request.getSession();
+
         
        
             
@@ -53,7 +52,7 @@ public class StageplaatsController extends HttpServlet {
              String bedrijvenID = request.getParameter("primID");
              String userId = request.getParameter("userId");
              Integer idBedrijven = Integer.parseInt(bedrijvenID);
-//             Integer IDbedrijven = Integer.parseInt(bedrijvenID);
+
             
             
             
@@ -71,20 +70,7 @@ public class StageplaatsController extends HttpServlet {
             request.setAttribute("bedrijvenlist", bedrijvenlist);
             request.setAttribute("userId", userId);
             System.out.println("lengte = " + bedrijvenlist.size());
-//            
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet StageBedrijvenServletController</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h2> Servlet Van Bedrijven</h2>");
-//           
-//            out.println("</body>");
-//            out.println("</html>");
-//             HttpSession session=request.getSession();
-//            request.setAttribute("bedrijvenID", bedrijvenID);
-//            response.sendRedirect("list.jsp");
+
              dispatch.forward(request, response);
         }
     }

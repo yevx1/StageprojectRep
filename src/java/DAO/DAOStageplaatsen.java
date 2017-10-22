@@ -94,15 +94,7 @@ public class DAOStageplaatsen {
              Query query = session.createQuery(hql);
              query .setInteger("primID", primID) ;
               users= query.list();      
-                    
-//                    "from Stageplaatsen where id =: BedrijvenID";
-//            Query query = session.createQuery(hql);
-//            query.setInteger("id", primID);
-//            users= query.list();
-            
-            
-//            query.setInteger("primID", primID);
-//            System.out.println("users querried en lengte = " + users.size());
+
         } catch (RuntimeException e) {
             e.printStackTrace();
         } finally {
@@ -114,7 +106,7 @@ public class DAOStageplaatsen {
     }
    
    public List<Stageplaatsen> getAllUserss() {
-//        System.out.println("start method all users in dao"); 
+
         List<Stageplaatsen> users = new ArrayList<Stageplaatsen>();
         
         Transaction trns = null;
